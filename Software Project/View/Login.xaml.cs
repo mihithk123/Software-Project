@@ -72,13 +72,21 @@ namespace Software_Project.View
                                             Admin Admin = new Admin(); // Create an instance of AdminPage
                                             mainWin.MainContent.Navigate(Admin); // Navigate to AdminPage
 
-                                        }else if (userRole.Trim() == "manager")
+                                        }else if (userRole.Trim() == "Receptionist")
                                         {
+                                            Receptionist Receptionist = new Receptionist(); // Create an instance of AdminPage
+                                            mainWin.MainContent.Navigate(Receptionist); // Navigate to AdminPage
 
                                         }
                                         else if (userRole.Trim() == "doctor")
                                         {
-
+                                            Doctor doctor = new Doctor(); // Create an instance of AdminPage
+                                            mainWin.MainContent.Navigate(doctor); // Navigate to AdminPage
+                                        }
+                                        else if (userRole.Trim() == "patient")
+                                        {
+                                            patient patient = new patient(); // Create an instance of AdminPage
+                                            mainWin.MainContent.Navigate(patient); // Navigate to AdminPage
                                         }
                                     }
                                     else

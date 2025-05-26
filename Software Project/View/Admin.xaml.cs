@@ -45,5 +45,10 @@ namespace Software_Project.View
         {
             NavigationService?.Navigate(new Software_Project.sub_view.Patient());
         }
+
+        private void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Software_Project.View.Login());
+        }
     }
 }

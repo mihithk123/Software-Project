@@ -4,9 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Software_Project.sub_view"
-      mc:Ignorable="d" 
-      d:DesignHeight="508.846" d:DesignWidth="879.615"
-      Title="Patient">
+      mc:Ignorable="d"
+      Title="Patient" Height="498" Width="872">
 
     <Grid Margin="20" Background="White">
         <Grid.RowDefinitions>
