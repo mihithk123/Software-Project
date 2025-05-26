@@ -1,0 +1,99 @@
+﻿<Page x:Class="Software_Project.sub_view.Doctor"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Software_Project.sub_view"
+      mc:Ignorable="d" 
+      d:DesignHeight="479.81" d:DesignWidth="845.23"
+      Title="doctor">
+
+
+    <Grid Margin="20" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Add Doctor Form -->
+        <Border Grid.Row="0" BorderBrush="white" BorderThickness="1" Padding="15" Margin="0,0,0,20">
+            <StackPanel>
+                <TextBlock Text="Add New Doctor" FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- First Name -->
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="First Name:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Name="txtFirstName" Margin="0,5,15,5" Padding="5"/>
+
+                    <!-- Last Name -->
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="Last Name:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBox Grid.Row="0" Grid.Column="3" Name="txtLastName" Margin="0,5,0,5" Padding="5"/>
+
+                    <!-- Specialization -->
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Specialization:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Name="txtSpecialization" Margin="0,5,15,5" Padding="5"/>
+
+                    <!-- Phone -->
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="Phone:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="3" Name="txtPhone" Margin="0,5,0,5" Padding="5"/>
+
+                    <!-- Email -->
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Email:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Name="txtEmail" Margin="0,5,15,5" Padding="5"/>
+
+                    <!-- Experience -->
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="Experience (Years):" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBox Grid.Row="2" Grid.Column="3" Name="txtExperience" Margin="0,5,0,5" Padding="5"/>
+                </Grid>
+
+                <!-- Buttons -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                    <Button Name="btnAdd" Content="Add Doctor" Padding="10,5" Margin="0,0,10,0" />
+                    <Button Name="btnClear" Content="Clear" Padding="10,5" Click="btnClear_Click_1" />
+                </StackPanel>
+                <Button x:Name="Go_to_admin" Content="Go Back" Width="91" Click="Button_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Doctors Table -->
+        <Border Grid.Row="1" BorderBrush="white" BorderThickness="1" Padding="15">
+            <StackPanel>
+                <TextBlock Text="Doctors List" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                <DataGrid Name="dgDoctors" AutoGenerateColumns="False" CanUserAddRows="False" 
+                          HeadersVisibility="Column" GridLinesVisibility="All">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="100" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="100" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Specialization" Binding="{Binding Specialization}" Width="120" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="100" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Experience" Binding="{Binding Experience}" Width="80" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Header="Actions" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Delete"
+                                            Tag="{Binding Id}" Padding="5,2"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
