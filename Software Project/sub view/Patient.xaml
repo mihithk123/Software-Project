@@ -89,5 +89,6 @@
                 </DataGrid>
             </StackPanel>
         </Border>
+        <Button Content="Go Back" HorizontalAlignment="Left" Margin="391,185,0,0" VerticalAlignment="Top" Width="94" Click="Button_Click"/>
     </Grid>
 </Page>

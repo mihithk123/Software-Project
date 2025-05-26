@@ -69,5 +69,10 @@ namespace Software_Project.sub_view
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Software_Project.View.Admin());
+        }
     }
 }
