@@ -29,5 +29,15 @@ namespace Software_Project.View
         {
             NavigationService?.Navigate(new Software_Project.View.Login());
         }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Software_Project.sub_view.Patient());
+        }
+
+        private void ViewDoctorsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Software_Project.sub_view.Doctor());
+        }
     }
 }

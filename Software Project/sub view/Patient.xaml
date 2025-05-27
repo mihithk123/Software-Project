@@ -18,7 +18,7 @@
             <StackPanel>
                 <TextBlock Text="Add New Patient" FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
 
-                <Grid>
+                <Grid Height="157">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
@@ -47,8 +47,26 @@
                     <TextBox Grid.Row="1" Grid.Column="3" Name="txtPhone" Margin="0,5,0,5" Padding="5"/>
 
                     <!-- Email -->
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Email:" VerticalAlignment="Top" Margin="0,6,10,0"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Name="txtEmail" Margin="0,0,15,10" Padding="5"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Password" VerticalAlignment="Top" Margin="10,25,331,0" RenderTransformOrigin="0.491,-0.811" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtEmail_Copy" Margin="0,19,15,145" Padding="5" Grid.RowSpan="3"/>
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="UserName" VerticalAlignment="Top" Margin="3,8,5,0"/>
+                    <TextBox Grid.Row="3" Grid.Column="2" x:Name="txtEmail_Copy1" Margin="68,2,15,118" Padding="5" Grid.ColumnSpan="2"/>
+                    <ComboBox Grid.Column="2"
+                           HorizontalAlignment="Left"
+                           Grid.Row="3"
+                           VerticalAlignment="Top"
+                           Width="211"
+                           SelectionChanged="ComboBox_SelectionChanged" Grid.ColumnSpan="2" Margin="68,47,0,0">
+                        <ComboBoxItem Content="Patient" />
+                        <ComboBoxItem Content="" />
+                        <ComboBoxItem Content="" />
+                        <ComboBoxItem Content="" />
+                        <ComboBoxItem Content="" />
+                    </ComboBox>
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="UserName" VerticalAlignment="Top" Margin="3,8,5,0"/>
+                    <TextBlock Grid.Row="3" Grid.Column="2" VerticalAlignment="Top" Margin="7,47,0,0"><Run Text="UserRole"/><LineBreak/><Run/></TextBlock>
+
+
 
                     <!-- Experience -->
                 </Grid>
@@ -88,6 +106,6 @@
                 </DataGrid>
             </StackPanel>
         </Border>
-        <Button Content="Go Back" HorizontalAlignment="Left" Margin="391,185,0,0" VerticalAlignment="Top" Width="94" Click="Button_Click"/>
+        <Button Content="Go Back" HorizontalAlignment="Left" Margin="394,229,0,0" VerticalAlignment="Top" Width="94" Click="Button_Click"/>
     </Grid>
 </Page>

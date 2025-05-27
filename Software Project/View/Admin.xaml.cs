@@ -50,5 +50,10 @@ namespace Software_Project.View
         {
             NavigationService?.Navigate(new Software_Project.View.Login());
         }
+
+        private void QuickReportsBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

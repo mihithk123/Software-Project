@@ -74,5 +74,10 @@ namespace Software_Project.sub_view
         {
             NavigationService?.Navigate(new Software_Project.View.Admin());
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

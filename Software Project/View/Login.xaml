@@ -232,7 +232,7 @@
             <Button x:Name="CreateAccountButton" 
                     Content="Create Account" 
                     Style="{StaticResource LinkButtonStyle}"
-                    HorizontalAlignment="Center"/>
+                    HorizontalAlignment="Center" Click="CreateAccountButton_Click"/>
 
         </StackPanel>
     </Grid>

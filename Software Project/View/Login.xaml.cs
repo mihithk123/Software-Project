@@ -82,11 +82,13 @@ namespace Software_Project.View
                                         {
                                             Doctor doctor = new Doctor(); // Create an instance of AdminPage
                                             mainWin.MainContent.Navigate(doctor); // Navigate to AdminPage
+
                                         }
                                         else if (userRole.Trim() == "patient")
                                         {
                                             patient patient = new patient(); // Create an instance of AdminPage
                                             mainWin.MainContent.Navigate(patient); // Navigate to AdminPage
+
                                         }
                                     }
                                     else
@@ -142,6 +144,11 @@ namespace Software_Project.View
             }
 
             return isValidUser;
+        }
+
+        private void CreateAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Software_Project.sub_view.Patient());
         }
     }
 }

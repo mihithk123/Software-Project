@@ -4,9 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Software_Project.sub_view"
-      mc:Ignorable="d" 
-      d:DesignHeight="479.81" d:DesignWidth="845.23"
-      Title="doctor">
+      mc:Ignorable="d"
+      Title="doctor" Height="551" Width="846">
 
 
     <Grid Margin="20" Background="White">
@@ -43,7 +42,7 @@
                     <TextBox Grid.Row="0" Grid.Column="3" Name="txtLastName" Margin="0,5,0,5" Padding="5"/>
 
                     <!-- Specialization -->
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Specialization:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Specialization:" VerticalAlignment="Center" Margin="5,0,5,0"/>
                     <TextBox Grid.Row="1" Grid.Column="1" Name="txtSpecialization" Margin="0,5,15,5" Padding="5"/>
 
                     <!-- Phone -->
@@ -55,11 +54,29 @@
                     <!-- Experience -->
                     <TextBlock Grid.Row="2" Grid.Column="2" Text="Experience (Years):" VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <TextBox Grid.Row="2" Grid.Column="3" Name="txtExperience" Margin="0,5,0,5" Padding="5"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Password:" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtSpecialization_Copy" Margin="0,5,15,5" Padding="5"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="UserName:" VerticalAlignment="Top" Margin="5,16,5,0"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtSpecialization_Copy1" Margin="0,10,15,10" Padding="5"/>
+                    <ComboBox Grid.Column="2"
+                              HorizontalAlignment="Left"
+                              Grid.Row="3"
+                              VerticalAlignment="Center"
+                              Width="169"
+                              SelectionChanged="ComboBox_SelectionChanged" Grid.ColumnSpan="2" Margin="107,0,0,0">
+                        <ComboBoxItem Content="" />
+                        <ComboBoxItem Content="Doctor" />
+                        <ComboBoxItem Content="" />
+                        <ComboBoxItem Content="" />
+                        <ComboBoxItem Content="" />
+                    </ComboBox>
+
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="User Role" VerticalAlignment="Center" Margin="22,0,10,0"/>
                 </Grid>
 
                 <!-- Buttons -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
-                    <Button Name="btnAdd" Content="Add Doctor" Padding="10,5" Margin="0,0,10,0" />
+                    <Button Name="btnAdd" Content="Add Doctor" Padding="10,5" Margin="0,0,10,0" Click="btnAdd_Click_1" />
                     <Button Name="btnClear" Content="Clear" Padding="10,5" Click="btnClear_Click_1" />
                 </StackPanel>
                 <Button x:Name="Go_to_admin" Content="Go Back" Width="91" Click="Button_Click"/>

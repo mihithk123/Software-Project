@@ -11,7 +11,7 @@
     <Grid Background="White" Margin="0,0,-44,0">
         <!-- Add Doctor Form -->
         <Border Grid.Row="0" BorderBrush="white" BorderThickness="1" Padding="15" Margin="20,17,20,205">
-            <StackPanel>
+            <StackPanel Margin="0,0,-16,-41">
                 <TextBlock Text="Add New Users" FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
 
                 <Grid>
@@ -49,8 +49,25 @@
                     <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtEmail" Margin="0,5,15,5" Padding="5" TextChanged="txtEmail_TextChanged"/>
 
                     <!-- Experience -->
-                    <TextBlock Grid.Row="2" Grid.Column="2" Text="xperience (Years):" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="UserName" VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <TextBox Grid.Row="2" Grid.Column="3" x:Name="txtExperience" Margin="0,5,0,5" Padding="5" TextChanged="txtExperience_TextChanged"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Email:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtEmail_Copy" Margin="0,5,15,5" Padding="5" TextChanged="txtEmail_TextChanged"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Password" VerticalAlignment="Top" Margin="0,16,10,0"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtEmail_Copy1" Margin="0,10,15,0" Padding="5" TextChanged="txtEmail_TextChanged"/>
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="UserName" VerticalAlignment="Top" Margin="10,12,317,0" Grid.ColumnSpan="2"/>
+                    <ComboBox Grid.Column="3"
+                                HorizontalAlignment="Left"
+                                Grid.Row="3"
+                                VerticalAlignment="Top"
+                                Width="158"
+                                SelectionChanged="ComboBox_SelectionChanged" Margin="5,10,0,0">
+                        <ComboBoxItem Content="Admin" />
+                        <ComboBoxItem Content="Doctor" />
+                        <ComboBoxItem Content="Receptionist" />
+                        <ComboBoxItem Content="Patient" />
+                    </ComboBox>
+
                 </Grid>
 
                 <!-- Buttons -->
@@ -88,6 +105,6 @@
                 </DataGrid>
             </StackPanel>
         </Border>
-        <Button Content="Go Back" HorizontalAlignment="Left" Margin="390,230,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.065" Width="95" Click="Button_Click"/>
+        <Button Content="Go Back" HorizontalAlignment="Left" Margin="452,230,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.758,0.065" Width="95" Click="Button_Click"/>
     </Grid>
 </Page>
