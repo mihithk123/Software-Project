@@ -37,7 +37,7 @@
                     <TextBox Grid.Row="0" Grid.Column="3" x:Name="txtLastName" Margin="0,5,0,5" Padding="5" TextChanged="txtLastName_TextChanged"/>
 
                     <!-- Specialization -->
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Specialization:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Age:" VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtSpecialization" Margin="0,5,15,5" Padding="5" TextChanged="txtSpecialization_TextChanged"/>
 
                     <!-- Phone -->
@@ -45,28 +45,10 @@
                     <TextBox Grid.Row="1" Grid.Column="3" x:Name="txtPhone" Margin="0,5,0,5" Padding="5" TextChanged="txtPhone_TextChanged"/>
 
                     <!-- Email -->
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Email:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtEmail" Margin="0,5,15,5" Padding="5" TextChanged="txtEmail_TextChanged"/>
 
                     <!-- Experience -->
                     <TextBlock Grid.Row="2" Grid.Column="2" Text="UserName" VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <TextBox Grid.Row="2" Grid.Column="3" x:Name="txtExperience" Margin="0,5,0,5" Padding="5" TextChanged="txtExperience_TextChanged"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Email:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtEmail_Copy" Margin="0,5,15,5" Padding="5" TextChanged="txtEmail_TextChanged"/>
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Password" VerticalAlignment="Top" Margin="0,16,10,0"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtEmail_Copy1" Margin="0,10,15,0" Padding="5" TextChanged="txtEmail_TextChanged"/>
-                    <TextBlock Grid.Row="3" Grid.Column="2" Text="UserName" VerticalAlignment="Top" Margin="10,12,317,0" Grid.ColumnSpan="2"/>
-                    <ComboBox Grid.Column="3"
-                                HorizontalAlignment="Left"
-                                Grid.Row="3"
-                                VerticalAlignment="Top"
-                                Width="158"
-                                SelectionChanged="ComboBox_SelectionChanged" Margin="5,10,0,0">
-                        <ComboBoxItem Content="Admin" />
-                        <ComboBoxItem Content="Doctor" />
-                        <ComboBoxItem Content="Receptionist" />
-                        <ComboBoxItem Content="Patient" />
-                    </ComboBox>
 
                 </Grid>
 
@@ -84,16 +66,16 @@
                 <TextBlock Text="Users List" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
 
                 <DataGrid x:Name="dgDoctors" AutoGenerateColumns="False" CanUserAddRows="False" 
-                    HeadersVisibility="Column" GridLinesVisibility="All" SelectionChanged="dgDoctors_SelectionChanged">
+                    HeadersVisibility="Column" GridLinesVisibility="All" SelectionChanged="dgDoctors_SelectionChanged" Width="551">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50" IsReadOnly="True"/>
+                        
                         <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="100" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="100" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Specialization" Binding="{Binding Specialization}" Width="120" IsReadOnly="True"/>
+                        
                         <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="100" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Experience" Binding="{Binding Experience}" Width="80" IsReadOnly="True"/>
-                        <DataGridTemplateColumn Header="Actions" Width="100">
+                        
+                        <DataGridTemplateColumn Header="User" Width="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Content="Delete"

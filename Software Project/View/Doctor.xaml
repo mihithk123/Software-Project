@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Software_Project.View"
       mc:Ignorable="d" 
-      d:DesignHeight="728.674" d:DesignWidth="885.663"
-      Title="Doctor">
+      d:DesignHeight="651.474"
+      Title="Doctor" Width="899">
 
 
     <Grid Background="#FF2E86C1" Margin="0,0,-152,-12">
