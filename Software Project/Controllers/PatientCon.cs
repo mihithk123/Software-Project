@@ -14,9 +14,6 @@ namespace Software_Project.Controllers
             var patients = new ObservableCollection<PatientM>();
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                // FIX: Using the correct 'FirstName' column name to match your fixed database.
-                string query = "SELECT Id, FirstName, LastName, Phone, Age FROM Patient";
-                SqlCommand cmd = new SqlCommand(query, con);
                 con.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
