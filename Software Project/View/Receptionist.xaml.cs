@@ -29,5 +29,30 @@ namespace Software_Project.View
         {
             NavigationService?.Navigate(new Software_Project.View.Login());
         }
+
+        private void ViewPatientsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Software_Project.sub_view.Patient());
+        }
+
+        private void ViewDoctorsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Software_Project.sub_view.Doctor());
+        }
+
+        private void ViewAppointmentsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Software_Project.sub_view.Other_Users());
+        }
+
+        private void ViewPrescriptionsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Software_Project.sub_view.AppointmentsPage());
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Software_Project.sub_view.Patient());
+        }
     }
 }

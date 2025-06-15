@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Software_Project.Models
 {
-    // <<< FIX: Add the 'public' keyword here.
+   
     public class DocM
     {
+     
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

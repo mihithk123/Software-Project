@@ -23,6 +23,7 @@ namespace Software_Project.View
         public Doctor()
         {
             InitializeComponent();
+
         }
 
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)
@@ -38,6 +39,34 @@ namespace Software_Project.View
         private void ViewDoctorsBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new Software_Project.sub_view.Doctor());
+        }
+
+        private void ViewPatientsBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            NavigationService?.Navigate(new Software_Project.sub_view.Patient());
+        }
+
+        private void ViewPrescriptionsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Software_Project.sub_view.AppointmentsPage());
+        }
+
+        private void GenerateReportsBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CreatePrescriptionBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            NavigationService?.Navigate(new Software_Project.sub_view.PrescriptionsPage());
+
+        }
+
+        private void QuickReportsBtn_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }

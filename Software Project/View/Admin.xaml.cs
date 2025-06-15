@@ -55,5 +55,20 @@ namespace Software_Project.View
         {
 
         }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ViewPrescriptionsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Software_Project.sub_view.PrescriptionsPage());
+        }
+
+        private void CreatePrescriptionBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Software_Project.sub_view.AppointmentsPage());
+        }
     }
 }

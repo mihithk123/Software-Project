@@ -148,7 +148,7 @@ namespace Software_Project.View
 
         private void CreateAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new Software_Project.sub_view.Patient());
+            
         }
     }
 }

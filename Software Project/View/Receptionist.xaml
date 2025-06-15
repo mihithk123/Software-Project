@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Header -->
+        
         <Grid Grid.Row="0" Background="#FF1B4F72">
             <TextBlock Text="Clinic Management System - Receptionist Panel" 
               FontSize="24" 
@@ -36,17 +36,17 @@
            Margin="20" Click="LogoutBtn_Click"/>
         </Grid>
 
-        <!-- Main Content -->
+        
         <Grid Grid.Row="1" Background="#FFE8F4F8" Margin="16,21,24,19">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Left Menu Panel -->
+           
             <StackPanel Grid.Column="0" Background="#FFFFFF" Margin="10" Orientation="Vertical">
 
-                <!-- Menu Title -->
+                
                 <TextBlock Text="Management Menu" 
                   FontSize="18" 
                   FontWeight="Bold"
@@ -54,7 +54,7 @@
                   HorizontalAlignment="Center"
                   Margin="10,20,10,20"/>
 
-                <!-- Patient Management Section -->
+                
                 <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5">
                     <StackPanel Margin="10">
                         <TextBlock Text="Patient Management" 
@@ -69,13 +69,13 @@
                        Background="#FF3498DB" 
                        Foreground="White"
                        BorderThickness="0"
-                       Margin="0,3" >
-                            <RadioButton Content="View / Add Patient" Background="#FFFDF5F5"/>
+                       Margin="0,3" Click="ViewPatientsBtn_Click" >
+                            <RadioButton Content="View / Add Patient" Background="#FFFDF5F5" Checked="RadioButton_Checked"/>
                         </Button>
                     </StackPanel>
                 </Border>
 
-                <!-- Doctor Management Section -->
+               
                 <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5">
                     <StackPanel Margin="10">
                         <TextBlock Text="Doctor Management" 
@@ -91,11 +91,11 @@
                        Background="#FF28A745" 
                        Foreground="White"
                        BorderThickness="0"
-                       Margin="0,3" />
+                       Margin="0,3" Click="ViewDoctorsBtn_Click" />
                     </StackPanel>
                 </Border>
 
-                <!-- Appointment Management Section -->
+               
                 <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5">
                     <StackPanel Margin="10">
                         <TextBlock Text="Add / View Other Users" 
@@ -103,38 +103,37 @@
                           FontWeight="Bold"
                           Foreground="#FF1B4F72"
                           Margin="0,5"/>
-
                         <Button x:Name="ViewAppointmentsBtn" 
-                       Content="View / Add Appointments" 
+                       Content="View / Add " 
                        Width="180" 
                        Height="30"
                        Background="#FFFFC107" 
                        Foreground="Black"
                        BorderThickness="0"
-                       Margin="0,3" />
+                       Click="ViewAppointmentsBtn_Click" />
                     </StackPanel>
                 </Border>
 
-                <!-- Prescription Management Section -->
+                
                 <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5">
                     <StackPanel Margin="10">
-                        <TextBlock Text="Prescription Management" 
+                        <TextBlock Text="Appoinments" 
                           FontSize="14" 
                           FontWeight="Bold"
                           Foreground="#FF1B4F72"
                           Margin="0,5"/>
 
                         <Button x:Name="ViewPrescriptionsBtn" 
-                       Content="View Prescriptions" 
+                       Content="Mange Appoinments" 
                        Width="180" 
                        Height="30"
                        Background="#FF6F42C1" 
                        Foreground="White"
                        BorderThickness="0"
-                       Margin="0,3"/>
+                       Margin="0,3" Click="ViewPrescriptionsBtn_Click"/>
 
                         <Button x:Name="CreatePrescriptionBtn" 
-                       Content="Create Prescription" 
+                       Content="" 
                        Width="180" 
                        Height="30"
                        Background="#FF6F42C1" 
@@ -144,11 +143,11 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Reports Section -->
+               
                 <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5"/>
             </StackPanel>
 
-            <!-- Right Content Panel -->
+            
             <Grid Grid.Column="1" Background="#FFFFFF" Margin="20,20,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
@@ -156,7 +155,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <!-- Welcome Message -->
+                
                 <Border Grid.Row="0" Background="#FF5DADE2" Margin="10">
                     <TextBlock Text="Welcome to Receptionist Dashboard" 
                       FontSize="20" 
@@ -166,7 +165,7 @@
                       VerticalAlignment="Center"/>
                 </Border>
 
-                <!-- Statistics Cards -->
+                
                 <Grid Grid.Row="1" Margin="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -175,81 +174,17 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Total Patients Card -->
-                    <Border Grid.Column="0" Background="#FF28A745" Margin="0,149,10,-139" CornerRadius="5">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock x:Name="TotalPatientsLabel" 
-                              Text="150" 
-                              FontSize="24" 
-                              FontWeight="Bold"
-                              Foreground="White" 
-                              HorizontalAlignment="Center"/>
-                            <TextBlock Text="Total Patients" 
-                              FontSize="12" 
-                              Foreground="White" 
-                              HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- Total Doctors Card -->
-                    <Border Grid.Column="1" Background="#FF3498DB" Margin="0,149,10,-139" CornerRadius="5">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock x:Name="TotalDoctorsLabel" 
-                              Text="12" 
-                              FontSize="24" 
-                              FontWeight="Bold"
-                              Foreground="White" 
-                              HorizontalAlignment="Center"/>
-                            <TextBlock Text="Total Doctors" 
-                              FontSize="12" 
-                              Foreground="White" 
-                              HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- Appointments Today Card -->
-                    <Border Grid.Column="1" Background="#FFFFC107" Margin="175,149,10,-139" CornerRadius="5" Grid.ColumnSpan="2">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock x:Name="TodayAppointmentsLabel" 
-                              Text="28" 
-                              FontSize="24" 
-                              FontWeight="Bold"
-                              Foreground="Black" 
-                              HorizontalAlignment="Center"/>
-                            <TextBlock Text="Today's Appointments" 
-                              FontSize="12" 
-                              Foreground="Black" 
-                              HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- Total Prescriptions Card -->
-                    <Border Grid.Column="3" Background="#FF6F42C1" Margin="0,147,10,-137" CornerRadius="5">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock x:Name="TotalPrescriptionsLabel" 
-                              Text="340" 
-                              FontSize="24" 
-                              FontWeight="Bold"
-                              Foreground="White" 
-                              HorizontalAlignment="Center"/>
-                            <TextBlock Text="Prescriptions" 
-                              FontSize="12" 
-                              Foreground="White" 
-                              HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
+                    
                 </Grid>
 
-                <!-- Main Content Area -->
+                
                 <Grid Grid.Row="2" Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Content Title -->
-
-                    <!-- Content Display Area -->
+                    
                 </Grid>
             </Grid>
         </Grid>

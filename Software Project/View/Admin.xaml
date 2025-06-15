@@ -5,315 +5,181 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Software_Project.View"
       mc:Ignorable="d"
-      Title="Admin" Height="735" Width="578">
+      Title="Admin" d:DesignWidth="1080"
+      Background="#FFE8F4F8" Height="620">
+    <!-- RESPONSIVE CHANGE: Removed fixed Height and Width from Page. 
+         The page will now fill its parent container (e.g., Window or Frame). 
+         The d:DesignHeight/Width attributes are for the designer only. -->
 
-    <Grid Background="#FF2E86C1" Margin="10,0,-434,10">
+    <!-- RESPONSIVE CHANGE: Removed problematic negative margin from the main Grid.
+         The Grid now properly fills the Page. -->
+    <Grid Background="#FF2E86C1">
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="Auto"/>
+            <!-- Header height is determined by its content -->
             <RowDefinition Height="*"/>
+            <!-- Main content area takes all remaining space -->
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid Grid.Row="0" Background="#FF1B4F72">
+        <Grid Grid.Row="0" Background="#FF1B4F72" MinHeight="60">
             <TextBlock Text="Clinic Management System - Admin Panel" 
-                  FontSize="24" 
-                  FontWeight="Bold"
-                  Foreground="White" 
-                  HorizontalAlignment="Center"
-                  VerticalAlignment="Center"/>
+                       FontSize="24" FontWeight="Bold" Foreground="White" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Margin="10" TextWrapping="Wrap"/>
 
-            <Button x:Name="LogoutBtn" 
-               Content="Logout" 
-               Width="80" 
-               Height="35"
-               Background="#FFDC3545" 
-               Foreground="White"
-               FontWeight="Bold"
-               BorderThickness="0"
-               HorizontalAlignment="Right" 
-               VerticalAlignment="Center"
-               Margin="20" Click="LogoutBtn_Click"/>
+            <Button x:Name="LogoutBtn" Content="Logout" 
+                    Width="80" Height="35"
+                    Background="#FFDC3545" Foreground="White" FontWeight="Bold"
+                    BorderThickness="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Margin="0,0,20,0" Click="LogoutBtn_Click"/>
         </Grid>
 
         <!-- Main Content -->
-        <Grid Grid.Row="1" Background="#FFE8F4F8" Margin="20">
+        <Grid Grid.Row="1" Margin="10">
             <Grid.ColumnDefinitions>
+                <!-- A fixed-width column for the menu is a good responsive pattern. -->
                 <ColumnDefinition Width="250"/>
+                <!-- The content column takes all remaining horizontal space. -->
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <!-- Left Menu Panel -->
-            <StackPanel Grid.Column="0" Background="#FFFFFF" Margin="10" Orientation="Vertical">
+            <Border Grid.Column="0" Background="White" CornerRadius="5">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
 
-                <!-- Menu Title -->
-                <TextBlock Text="Management Menu" 
-                      FontSize="18" 
-                      FontWeight="Bold"
-                      Foreground="#FF1B4F72"
-                      HorizontalAlignment="Center"
-                      Margin="10,20,10,20"/>
+                        <TextBlock Text="Management Menu" FontSize="18" FontWeight="Bold"
+                                   Foreground="#FF1B4F72" HorizontalAlignment="Center" Margin="10,20,10,20"/>
 
-                <!-- Patient Management Section -->
-                <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5">
-                    <StackPanel Margin="10">
-                        <TextBlock Text="Patient Management" 
-                              FontSize="14" 
-                              FontWeight="Bold"
-                              Foreground="#FF1B4F72"
-                              Margin="0,5"/>
+                        <!-- Patient Management Section -->
+                        <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="Patient Management" FontSize="14" FontWeight="Bold" Foreground="#FF1B4F72" Margin="0,5"/>
+                                <!-- RESPONSIVE CHANGE: Removed fixed Width. HorizontalAlignment=Stretch makes it fill its container. -->
+                                <!-- SEMANTIC FIX: Replaced RadioButton inside a Button with just a Content string. -->
+                                <Button x:Name="ViewPatientsBtn" Content="Manage Patients" HorizontalAlignment="Stretch" 
+                                        Height="35" Background="#FF3498DB" Foreground="White"
+                                        BorderThickness="0" Margin="0,5" Click="ViewPatientsBtn_Click"/>
+                            </StackPanel>
+                        </Border>
 
-                        <Button x:Name="ViewPatientsBtn" 
-                           Width="180" 
-                           Height="30"
-                           Background="#FF3498DB" 
-                           Foreground="White"
-                           BorderThickness="0"
-                           Margin="0,3" Click="ViewPatientsBtn_Click">
-                            <RadioButton Content="Add / View"/>
-                        </Button>
+                        <!-- Doctor Management Section -->
+                        <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="Doctor Management" FontSize="14" FontWeight="Bold" Foreground="#FF1B4F72" Margin="0,5"/>
+                                <Button x:Name="ViewDoctorsBtn" Content="Manage Doctors" HorizontalAlignment="Stretch" 
+                                        Height="35" Background="#FF28A745" Foreground="White"
+                                        BorderThickness="0" Margin="0,5" Click="ViewDoctorsBtn_Click"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Receptionist Management Section -->
+                        <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="Add Other Users" FontSize="14" FontWeight="Bold" Foreground="#FF1B4F72" Margin="0,5"/>
+                                <Button x:Name="ViewReceptionistsBtn" Content="View / Add " HorizontalAlignment="Stretch" 
+                                        Height="35" Background="#FFFFC107" Foreground="Black"
+                                        BorderThickness="0" Margin="0,5" Click="ViewAppointmentsBtn_Click"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Other Management Section -->
+                        <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="More" FontSize="14" FontWeight="Bold" Foreground="#FF1B4F72" Margin="0,5"/>
+                                <Button x:Name="ViewPrescriptionsBtn" Content="View Prescriptions" HorizontalAlignment="Stretch"
+                                        Height="35" Background="#FF6F42C1" Foreground="White"
+                                        BorderThickness="0" Margin="0,5" Click="ViewPrescriptionsBtn_Click"/>
+                                <Button x:Name="ViewAppointmentsBtn" Content="View Appointments" HorizontalAlignment="Stretch"
+                                        Height="35" Background="#FF6F42C1" Foreground="White"
+                                        BorderThickness="0" Margin="0,5" Click="CreatePrescriptionBtn_Click"/>
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
-                </Border>
-
-                <!-- Doctor Management Section -->
-                <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5">
-                    <StackPanel Margin="10">
-                        <TextBlock Text="Doctor Management" 
-                              FontSize="14" 
-                              FontWeight="Bold"
-                              Foreground="#FF1B4F72"
-                              Margin="0,5"/>
-
-                        <Button x:Name="ViewDoctorsBtn" 
-                           Content="View / Add Doctors" 
-                           Width="180" 
-                           Height="30"
-                           Background="#FF28A745" 
-                           Foreground="White"
-                           BorderThickness="0"
-                           Margin="0,3" Click="ViewDoctorsBtn_Click"/>
-                    </StackPanel>
-                </Border>
-
-                <!-- Appointment Management Section -->
-                <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5">
-                    <StackPanel Margin="10">
-                        <TextBlock Text="Add / Receptionist" 
-                              FontSize="14" 
-                              FontWeight="Bold"
-                              Foreground="#FF1B4F72"
-                              Margin="0,5"/>
-
-                        <Button x:Name="ViewAppointmentsBtn" 
-                           Content="View / Add Receptionist" 
-                           Width="180" 
-                           Height="30"
-                           Background="#FFFFC107" 
-                           Foreground="Black"
-                           BorderThickness="0"
-                           Margin="0,3" Click="ViewAppointmentsBtn_Click"/>
-                    </StackPanel>
-                </Border>
-
-                <!-- Prescription Management Section -->
-                <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5">
-                    <StackPanel Margin="10">
-                        <TextBlock Text="Prescription Management" 
-                              FontSize="14" 
-                              FontWeight="Bold"
-                              Foreground="#FF1B4F72"
-                              Margin="0,5"/>
-
-                        <Button x:Name="ViewPrescriptionsBtn" 
-                           Content="View Prescriptions" 
-                           Width="180" 
-                           Height="30"
-                           Background="#FF6F42C1" 
-                           Foreground="White"
-                           BorderThickness="0"
-                           Margin="0,3"/>
-
-                        <Button x:Name="CreatePrescriptionBtn" 
-                           Content="Create Prescription" 
-                           Width="180" 
-                           Height="30"
-                           Background="#FF6F42C1" 
-                           Foreground="White"
-                           BorderThickness="0"
-                           Margin="0,3"/>
-                    </StackPanel>
-                </Border>
-
-                <!-- Reports Section -->
-                <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5">
-                    <StackPanel Margin="10">
-                        <TextBlock Text="Reports" 
-                              FontSize="14" 
-                              FontWeight="Bold"
-                              Foreground="#FF1B4F72"
-                              Margin="0,5"/>
-
-                        <Button x:Name="GenerateReportsBtn" 
-                           Content="Generate Reports" 
-                           Width="180" 
-                           Height="30"
-                           Background="#FFFD7E14" 
-                           Foreground="White"
-                           BorderThickness="0"
-                           Margin="0,3"/>
-                    </StackPanel>
-                </Border>
-            </StackPanel>
+                </ScrollViewer>
+            </Border>
 
             <!-- Right Content Panel -->
-            <Grid Grid.Column="1" Background="#FFFFFF" Margin="10">
+            <Grid Grid.Column="1" Margin="10,0,0,0">
+                <!-- RESPONSIVE CHANGE: Cleaned up RowDefinitions. Using Auto and * sizing instead of fixed values or hacks. -->
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Welcome Message -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Statistics Cards -->
                     <RowDefinition Height="*"/>
+                    <!-- Main Content Area (takes remaining space) -->
                 </Grid.RowDefinitions>
 
                 <!-- Welcome Message -->
-                <Border Grid.Row="0" Background="#FF5DADE2" Margin="10">
-                    <TextBlock Text="Welcome to Admin Dashboard" 
-                          FontSize="20" 
-                          FontWeight="Bold"
-                          Foreground="White"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"/>
+                <Border Grid.Row="0" Background="#FF5DADE2" CornerRadius="5" Margin="0,0,0,10">
+                    <TextBlock Text="Welcome to the Admin Dashboard" FontSize="20" FontWeight="Bold" Foreground="White"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" Padding="10"/>
                 </Border>
 
                 <!-- Statistics Cards -->
-                <Grid Grid.Row="1" Margin="10">
+                <Grid Grid.Row="1" Margin="0,0,0,10">
+                    <Grid.Resources>
+                        <Style x:Key="StatCardStyle" TargetType="Border">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="CornerRadius" Value="5"/>
+                            <Setter Property="Padding" Value="10"/>
+                        </Style>
+                    </Grid.Resources>
+                    <!-- RESPONSIVE CHANGE: Using star-sizing for columns. They will share space equally and resize. -->
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
-                    <!-- Total Patients Card -->
-                    <Border Grid.Column="0" Background="#FF28A745" Margin="5" CornerRadius="5">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock x:Name="TotalPatientsLabel" 
-                                  Text="150" 
-                                  FontSize="24" 
-                                  FontWeight="Bold"
-                                  Foreground="White" 
-                                  HorizontalAlignment="Center"/>
-                            <TextBlock Text="Total Patients" 
-                                  FontSize="12" 
-                                  Foreground="White" 
-                                  HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- Total Doctors Card -->
-                    <Border Grid.Column="1" Background="#FF3498DB" Margin="5" CornerRadius="5">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock x:Name="TotalDoctorsLabel" 
-                                  Text="12" 
-                                  FontSize="24" 
-                                  FontWeight="Bold"
-                                  Foreground="White" 
-                                  HorizontalAlignment="Center"/>
-                            <TextBlock Text="Total Doctors" 
-                                  FontSize="12" 
-                                  Foreground="White" 
-                                  HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- Appointments Today Card -->
-                    <Border Grid.Column="2" Background="#FFFFC107" Margin="5" CornerRadius="5">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock x:Name="TodayAppointmentsLabel" 
-                                  Text="28" 
-                                  FontSize="24" 
-                                  FontWeight="Bold"
-                                  Foreground="Black" 
-                                  HorizontalAlignment="Center"/>
-                            <TextBlock Text="Today's Appointments" 
-                                  FontSize="12" 
-                                  Foreground="Black" 
-                                  HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- Total Prescriptions Card -->
-                    <Border Grid.Column="3" Background="#FF6F42C1" Margin="5" CornerRadius="5">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock x:Name="TotalPrescriptionsLabel" 
-                                  Text="340" 
-                                  FontSize="24" 
-                                  FontWeight="Bold"
-                                  Foreground="White" 
-                                  HorizontalAlignment="Center"/>
-                            <TextBlock Text="Prescriptions" 
-                                  FontSize="12" 
-                                  Foreground="White" 
-                                  HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
                 </Grid>
 
                 <!-- Main Content Area -->
-                <Grid Grid.Row="2" Margin="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="290*"/>
-                        <RowDefinition Height="107*"/>
-                    </Grid.RowDefinitions>
+                <Border Grid.Row="2" Background="White" CornerRadius="5">
+                    <!-- RESPONSIVE CHANGE: This Grid is structured to hold a title, scrolling content, and actions at the bottom. -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <!-- Title Row -->
+                            <RowDefinition Height="*"/>
+                            <!-- Content Row (takes all space) -->
+                            <RowDefinition Height="Auto"/>
+                            <!-- Actions Row -->
+                        </Grid.RowDefinitions>
 
-                    <!-- Content Title -->
-                    <Border Grid.Row="0" Background="#FF85C1E9">
-                        <TextBlock x:Name="ContentTitleLabel" 
-                              Text="Recent Activities" 
-                              FontSize="16" 
-                              FontWeight="Bold"
-                              Foreground="#FF1B4F72"
-                              HorizontalAlignment="Center"
-                              VerticalAlignment="Center"/>
-                    </Border>
+                        <!-- Content Title -->
+                        <Border Grid.Row="0" Background="#FF85C1E9" CornerRadius="5,5,0,0" Padding="10">
+                            <TextBlock x:Name="ContentTitleLabel" Text="Recent Activities" FontSize="16" FontWeight="Bold"
+                                       Foreground="#FF1B4F72" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
 
-                    <!-- Content Display Area -->
-                    <Border Grid.Row="1" Background="#FFF8F9FA" BorderBrush="#FFAED6F1" BorderThickness="1" Grid.RowSpan="2">
-                        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,173">
-                            <StackPanel x:Name="ContentDisplayPanel" Margin="15">
-
-                                <!-- Sample Recent Activities -->
-
-                                <!-- Quick Actions -->
-                                <TextBlock Text="Quick Actions:" 
-                                      FontSize="14" 
-                                      FontWeight="Bold"
-                                      Foreground="#FF1B4F72"
-                                      Margin="0,20,0,10"/>
-
-                                <StackPanel Orientation="Horizontal">
-                                    <Button x:Name="QuickAddPatientBtn" 
-                                       Content="Add Patient" 
-                                       Width="120" 
-                                       Height="35"
-                                       Background="#FF28A745" 
-                                       Foreground="White"
-                                       BorderThickness="0"
-                                       Margin="5" Click="QuickAddPatientBtn_Click"/>
-
-                                    <Button x:Name="QuickReportsBtn" 
-                                       Content="View Reports" 
-                                       Width="120" 
-                                       Height="35"
-                                       Background="#FFFD7E14" 
-                                       Foreground="White"
-                                       BorderThickness="0"
-                                       Margin="5" Click="QuickReportsBtn_Click"/>
-                                </StackPanel>
+                        <!-- Content Display Area -->
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="15">
+                            <StackPanel x:Name="ContentDisplayPanel">
+                                <!-- Sample/Dynamic Content Goes Here -->
                             </StackPanel>
                         </ScrollViewer>
-                    </Border>
-                </Grid>
+
+                        <!-- Quick Actions Area (always at the bottom) -->
+                        <Border Grid.Row="1" BorderBrush="#FFDDDDDD" BorderThickness="0,1,0,0" Padding="10" Margin="10,28,-10,320" RenderTransformOrigin="0.499,-0.911">
+                            <StackPanel>
+                                <TextBlock Text="Quick Actions:" FontSize="14" FontWeight="Bold"
+                                           Foreground="#FF1B4F72" Margin="0,0,0,10"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="QuickAddPatientBtn" Content="Add Patient" 
+                                            Width="120" Height="35" Background="#FF28A745" Foreground="White"
+                                            BorderThickness="0" Margin="5,0" Click="QuickAddPatientBtn_Click"/>
+                                    <Button x:Name="QuickAddDoctorBtn" Content="Add Doctor" 
+                                            Width="120" Height="35" Background="#FF3498DB" Foreground="White"
+                                            BorderThickness="0" Margin="5,0" Click="QuickAddPatientBtn_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Border>
             </Grid>
         </Grid>
     </Grid>
-
 </Page>

@@ -1,5 +1,5 @@
-﻿using Software_Project.Controllers; // Using your new controller
-using Software_Project.Models;      // Using your new model
+﻿using Software_Project.Controllers;
+using Software_Project.Models;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,12 +9,12 @@ namespace Software_Project.sub_view
 {
     public partial class Doctor : Page
     {
-        // Use your controller name: DoctorCon
-        private readonly DoctorCon _doctorController = new DoctorCon();
+        private DoctorCon _doctorController;
 
         public Doctor()
         {
             InitializeComponent();
+            _doctorController = new DoctorCon();
             LoadDoctors();
         }
 
@@ -22,7 +22,8 @@ namespace Software_Project.sub_view
         {
             try
             {
-                dgDoctors.ItemsSource = _doctorController.GetAllDoctors();
+                var doctors = _doctorController.GetAllDoctors();
+                dgDoctors.ItemsSource = doctors;
             }
             catch (Exception ex)
             {
@@ -30,6 +31,7 @@ namespace Software_Project.sub_view
             }
         }
 
+        // *** CORRECTED ***
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtFirstName.Text) ||
@@ -40,15 +42,17 @@ namespace Software_Project.sub_view
                 return;
             }
 
-            // Create an instance of your model: DocM
+            // Create the doctor object WITHOUT the ID. The database will create it.
             var newDoctor = new DocM
             {
+                // ID IS REMOVED FROM HERE - THIS FIXES THE CRASH
                 FirstName = txtFirstName.Text.Trim(),
                 LastName = txtLastName.Text.Trim(),
                 Phone = txtPhone.Text.Trim(),
                 Specialization = txtSpecialization.Text.Trim()
             };
 
+            // Safely parse experience years
             int.TryParse(txtExperience.Text.Trim(), out int years);
             newDoctor.ExperienceYears = years;
 
@@ -71,28 +75,32 @@ namespace Software_Project.sub_view
             }
         }
 
+        // *** CORRECTED and COMPLETED ***
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtFirstName.Text) || string.IsNullOrWhiteSpace(txtLastName.Text))
+            if (!int.TryParse(ID.Text.Trim(), out int doctorId))
             {
-                MessageBox.Show("First Name and Last Name are required to identify the doctor to update!");
+                MessageBox.Show("Please select a doctor from the list to update.", "No Doctor Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             var doctorToUpdate = new DocM
             {
+                Id = doctorId,
                 FirstName = txtFirstName.Text.Trim(),
                 LastName = txtLastName.Text.Trim(),
                 Phone = txtPhone.Text.Trim(),
                 Specialization = txtSpecialization.Text.Trim()
             };
 
+            // *** ADDED: Don't forget to update experience years! ***
             int.TryParse(txtExperience.Text.Trim(), out int years);
             doctorToUpdate.ExperienceYears = years;
 
             try
             {
-                if (_doctorController.UpdateDoctor(doctorToUpdate))
+                // *** ADDED: Call the update method and handle the result ***
+                if (_doctorController.UpdateDoctor(doctorToUpdate)) // Assuming you have an UpdateDoctor method
                 {
                     MessageBox.Show("Doctor updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     ClearFields();
@@ -100,45 +108,12 @@ namespace Software_Project.sub_view
                 }
                 else
                 {
-                    MessageBox.Show("No matching doctor found to update!", "Update Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Failed to update doctor!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Update error: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void btnClear_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtFirstName.Text) || string.IsNullOrWhiteSpace(txtLastName.Text))
-            {
-                MessageBox.Show("Please enter both First Name and Last Name to delete.", "Missing Info", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            MessageBoxResult confirm = MessageBox.Show($"Are you sure you want to delete Dr. {txtFirstName.Text} {txtLastName.Text}?",
-                "Confirm Deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-            if (confirm != MessageBoxResult.Yes)
-                return;
-
-            try
-            {
-                if (_doctorController.DeleteDoctor(txtFirstName.Text.Trim(), txtLastName.Text.Trim()))
-                {
-                    MessageBox.Show("Doctor deleted successfully!", "Deleted", MessageBoxButton.OK, MessageBoxImage.Information);
-                    ClearFields();
-                    LoadDoctors();
-                }
-                else
-                {
-                    MessageBox.Show("Doctor not found!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error deleting doctor: " + ex.Message);
+                MessageBox.Show($"Error updating doctor: {ex.Message}", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -146,6 +121,7 @@ namespace Software_Project.sub_view
         {
             if (dgDoctors.SelectedItem is DocM selectedDoctor)
             {
+                ID.Text = selectedDoctor.Id.ToString();
                 txtFirstName.Text = selectedDoctor.FirstName;
                 txtLastName.Text = selectedDoctor.LastName;
                 txtPhone.Text = selectedDoctor.Phone;
@@ -154,8 +130,10 @@ namespace Software_Project.sub_view
             }
         }
 
+        // *** CORRECTED ***
         private void ClearFields()
         {
+            ID.Clear(); // <-- ADDED: Clear the ID field as well
             txtFirstName.Clear();
             txtLastName.Clear();
             txtPhone.Clear();
@@ -165,9 +143,15 @@ namespace Software_Project.sub_view
             dgDoctors.SelectedItem = null;
         }
 
+        // Navigation methods (unchanged)
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new Software_Project.View.Admin());
+            NavigationService?.Navigate(new Software_Project.View.Doctor());
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Software_Project.sub_view.Doctor());
         }
     }
 }

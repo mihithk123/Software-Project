@@ -1,4 +1,6 @@
-﻿using Software_Project.Controllers;
+﻿// FILE: Software_Project/sub_view/Patient.xaml.cs
+
+using Software_Project.Controllers;
 using Software_Project.Models;
 using System;
 using System.Windows;
@@ -21,8 +23,7 @@ namespace Software_Project.sub_view
         {
             try
             {
-                // FIX: Using the correct name 'dgPatients' from your XAML file
-                dgDoctors.ItemsSource = _patientController.GetAllPatients();
+                dgPatients.ItemsSource = _patientController.GetAllPatients();
             }
             catch (Exception ex)
             {
@@ -30,135 +31,119 @@ namespace Software_Project.sub_view
             }
         }
 
-        // FIX: Renamed to follow C# naming conventions
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtFirstName.Text) ||
-                string.IsNullOrWhiteSpace(txtLastName.Text) ||
-                string.IsNullOrWhiteSpace(txtPhone.Text) ||
-                string.IsNullOrWhiteSpace(txtAge.Text))
+            if (string.IsNullOrWhiteSpace(txtFirstName.Text) || string.IsNullOrWhiteSpace(txtLastName.Text))
             {
-                MessageBox.Show("Please fill in all fields!", "Missing Data", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("First Name and Last Name are required.", "Missing Data", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            if (!int.TryParse(txtAge.Text.Trim(), out int age))
-            {
-                MessageBox.Show("Please enter a valid number for Age.", "Invalid Age", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            // Now this will work because PatientM.Age is an int
             var newPatient = new PatientM
             {
                 FirstName = txtFirstName.Text.Trim(),
                 LastName = txtLastName.Text.Trim(),
                 Phone = txtPhone.Text.Trim(),
-                Age = age
+                Age = txtAge.Text.Trim()
             };
 
             try
             {
                 if (_patientController.AddPatient(newPatient))
                 {
-                    MessageBox.Show("Patient added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Patient added successfully!");
                     ClearFields();
                     LoadPatients();
                 }
                 else
                 {
-                    MessageBox.Show("Failed to add patient.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Failed to add patient.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Error: " + ex.Message, "Database Error");
             }
         }
 
-        // FIX: Renamed to follow C# naming conventions
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtFirstName.Text) || string.IsNullOrWhiteSpace(txtLastName.Text))
+            if (dgPatients.SelectedItem is PatientM selectedPatient)
             {
-                MessageBox.Show("Select a patient to update their First and Last Name.");
-                return;
-            }
-
-            if (!int.TryParse(txtAge.Text.Trim(), out int age))
-            {
-                MessageBox.Show("Please enter a valid number for Age.", "Invalid Age", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            // Now this will work because PatientM.Age is an int
-            var patientToUpdate = new PatientM
-            {
-                FirstName = txtFirstName.Text.Trim(),
-                LastName = txtLastName.Text.Trim(),
-                Phone = txtPhone.Text.Trim(),
-                Age = age
-            };
-
-            try
-            {
-                if (_patientController.UpdatePatient(patientToUpdate))
+                var patientToUpdate = new PatientM
                 {
-                    MessageBox.Show("Patient updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    ClearFields();
-                    LoadPatients();
+                    Id = selectedPatient.Id, // Use the ID for a safe update
+                    FirstName = txtFirstName.Text.Trim(),
+                    LastName = txtLastName.Text.Trim(),
+                    Phone = txtPhone.Text.Trim(),
+                    Age = txtAge.Text.Trim()
+                };
+
+                try
+                {
+                    if (_patientController.UpdatePatient(patientToUpdate))
+                    {
+                        MessageBox.Show("Patient updated successfully!");
+                        ClearFields();
+                        LoadPatients();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to update patient.");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Patient not found.", "Update Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Error: " + ex.Message, "Database Error");
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Please select a patient from the list to update.");
             }
         }
 
-        // FIX: Renamed to follow C# naming conventions
+        // FIX: This method handles the delete button click
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtFirstName.Text) || string.IsNullOrWhiteSpace(txtLastName.Text))
+            if (dgPatients.SelectedItem is PatientM selectedPatient)
             {
-                MessageBox.Show("Select a patient to delete.");
-                return;
-            }
+                MessageBoxResult confirm = MessageBox.Show($"Are you sure you want to delete {selectedPatient.FirstName} {selectedPatient.LastName}?", "Confirm Deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (confirm != MessageBoxResult.Yes) return;
 
-            MessageBoxResult confirm = MessageBox.Show($"Are you sure you want to delete {txtFirstName.Text} {txtLastName.Text}?", "Confirm Deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (confirm != MessageBoxResult.Yes) return;
-
-            try
-            {
-                if (_patientController.DeletePatient(txtFirstName.Text.Trim(), txtLastName.Text.Trim()))
+                try
                 {
-                    MessageBox.Show("Patient deleted successfully!", "Deleted", MessageBoxButton.OK, MessageBoxImage.Information);
-                    ClearFields();
-                    LoadPatients();
+                    // Call the safe delete method with the patient's ID
+                    if (_patientController.DeletePatient(selectedPatient.Id))
+                    {
+                        MessageBox.Show("Patient deleted successfully!");
+                        ClearFields();
+                        LoadPatients();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Patient not found or could not be deleted.");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Patient not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Error deleting patient: " + ex.Message, "Database Error");
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Error deleting patient: " + ex.Message);
+                MessageBox.Show("Please select a patient from the list to delete.");
             }
         }
 
-        // FIX: Renamed and using correct DataGrid name 'dgPatients'
         private void DgPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dgDoctors.SelectedItem is PatientM selectedPatient)
+            if (dgPatients.SelectedItem is PatientM selectedPatient)
             {
                 txtFirstName.Text = selectedPatient.FirstName;
                 txtLastName.Text = selectedPatient.LastName;
                 txtPhone.Text = selectedPatient.Phone;
-                txtAge.Text = selectedPatient.Age.ToString(); // Convert int to string for display
+                txtAge.Text = selectedPatient.Age;
             }
         }
 
@@ -168,22 +153,37 @@ namespace Software_Project.sub_view
             txtLastName.Clear();
             txtPhone.Clear();
             txtAge.Clear();
+            dgPatients.SelectedItem = null;
             txtFirstName.Focus();
-            if (dgDoctors != null)
-            {
-                dgDoctors.SelectedItem = null;
-            }
         }
 
-        // FIX: Renamed to follow C# naming conventions
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
+            // Assuming you have an Admin view to navigate back to
             NavigationService?.Navigate(new Software_Project.View.Admin());
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ViewHistory_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new Software_Project.View.patient());
+            // Get the patient from the row where the button was clicked
+            if ((sender as FrameworkElement)?.DataContext is Models.PatientM selectedPatient)
+            {
+                // Create the full name string
+                string fullName = $"{selectedPatient.FirstName} {selectedPatient.LastName}";
+
+                // Navigate to the history page, passing the patient's ID and name
+                NavigationService?.Navigate(new MedicalHistoryPage(selectedPatient.Id, fullName));
+            }
+        }
+
+        private void BookAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the patient from the row where the button was clicked
+            if ((sender as FrameworkElement)?.DataContext is Models.PatientM selectedPatient)
+            {
+                // Navigate to the appointments page, passing the patient's ID to pre-select them
+                NavigationService?.Navigate(new AppointmentsPage(selectedPatient.Id));
+            }
         }
     }
 }

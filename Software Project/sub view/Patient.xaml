@@ -5,76 +5,153 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Software_Project.sub_view"
       mc:Ignorable="d"
-      Title="Patient" Height="498" Width="872">
+      Title="Patient Management" Height="682" Width="900">
 
-    <Grid Margin="20" Background="White">
+    <Page.Resources>
+        <!-- Your Styles are fine, no changes needed here -->
+        <Style TargetType="Button" x:Key="SimpleButton">
+            <Setter Property="Background" Value="#4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style TargetType="Button" x:Key="UpdateButton" BasedOn="{StaticResource SimpleButton}">
+            <Setter Property="Background" Value="#FF9800"/>
+        </Style>
+        <Style TargetType="Button" x:Key="DeleteButton" BasedOn="{StaticResource SimpleButton}">
+            <Setter Property="Background" Value="#F44336"/>
+        </Style>
+        <Style TargetType="Button" x:Key="BackButton" BasedOn="{StaticResource SimpleButton}">
+            <Setter Property="Background" Value="#757575"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="SimpleTextBox">
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="Foreground" Value="#333333"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="Title">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#2196F3"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="#F0F0F0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Add Patient Form -->
-        <Border Grid.Row="0" BorderBrush="white" BorderThickness="1" Padding="15" Margin="0,0,0,20">
-            <StackPanel>
-                <TextBlock Text="Add New Patient" FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
+        <!-- Header -->
+        <Border Grid.Row="0" Background="White" BorderBrush="#DDDDDD" BorderThickness="0,0,0,1">
+            <TextBlock Text="Patient Management System" FontSize="24" FontWeight="Bold" Foreground="#2196F3" Margin="30,20"/>
+        </Border>
 
-                <Grid Height="157">
+        <!-- Add Patient Form -->
+        <Border Grid.Row="1" Background="White" BorderBrush="#DDDDDD" BorderThickness="1" Padding="25" Margin="30,20,30,10">
+            <StackPanel>
+                <TextBlock Text="Add New Patient" Style="{StaticResource Title}"/>
+                <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="20"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="15"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!-- First Name -->
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="First Name:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Name="txtFirstName" Margin="0,5,15,5" Padding="5"/>
-
-                    <!-- Last Name -->
-                    <TextBlock Grid.Row="0" Grid.Column="2" Text="Last Name:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBox Grid.Row="0" Grid.Column="3" Name="txtLastName" Margin="0,5,0,5" Padding="5"/>
-
-                    <!-- Phone -->
-                    <TextBlock Grid.Row="1" Grid.Column="2" Text="Phone:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBox Grid.Row="1" Grid.Column="3" Name="txtPhone" Margin="0,5,0,5" Padding="5"/>
-
-                    <!-- Age -->
-                    <TextBlock Grid.Row="2" Grid.Column="2" Text="Age:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBox Grid.Row="2" Grid.Column="3" Name="txtAge" Margin="0,5,0,5" Padding="5"/>
+                    <StackPanel Grid.Row="0" Grid.Column="0">
+                        <TextBlock Text="First Name:" Style="{StaticResource Label}"/>
+                        <TextBox Name="txtFirstName" Style="{StaticResource SimpleTextBox}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="2">
+                        <TextBlock Text="Last Name:" Style="{StaticResource Label}"/>
+                        <TextBox Name="txtLastName" Style="{StaticResource SimpleTextBox}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="0">
+                        <TextBlock Text="Phone:" Style="{StaticResource Label}"/>
+                        <TextBox Name="txtPhone" Style="{StaticResource SimpleTextBox}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="2">
+                        <TextBlock Text="Age:" Style="{StaticResource Label}"/>
+                        <TextBox Name="txtAge" Style="{StaticResource SimpleTextBox}"/>
+                    </StackPanel>
                 </Grid>
 
-                <!-- Buttons -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
-                    <Button Name="btnAdd" Content="Add Patient" Padding="10,5" Margin="0,0,10,0" />
-                    <Button Name="btnUpdate" Content="Update" Padding="10,5" Margin="0,0,10,0"/>
-                    <Button Name="btnClear" Content="Delete" Padding="10,5"  />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                    <Button x:Name="btnAdd" Content="Register" Style="{StaticResource SimpleButton}" Click="BtnAdd_Click"/>
+                    <Button x:Name="btnUpdate" Content="Edit" Style="{StaticResource UpdateButton}" Click="BtnUpdate_Click"/>
+                    <Button x:Name="btnClear" Content="Delete" Style="{StaticResource DeleteButton}" Click="BtnClear_Click"/>
                 </StackPanel>
             </StackPanel>
         </Border>
 
-        <!-- Patients Table -->
-        <Border Grid.Row="1" BorderBrush="white" BorderThickness="1" Padding="15">
-            <StackPanel Margin="-6,-6,6,6">
-                <TextBlock Text="Patients List" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+        <!-- Patients List -->
+        <Border Grid.Row="2" Background="White" BorderBrush="#DDDDDD" BorderThickness="1" Padding="25" Margin="30,10,30,20">
+            <StackPanel>
+                <TextBlock Text="Patients List" Style="{StaticResource Title}"/>
+                <DataGrid x:Name="dgPatients" AutoGenerateColumns="False" CanUserAddRows="False"
+                          HeadersVisibility="Column" GridLinesVisibility="All" BorderThickness="1"
+                          BorderBrush="#DDDDDD" Background="White" RowBackground="White"
+                          AlternatingRowBackground="#F8F8F8" SelectionChanged="DgPatients_SelectionChanged"
+                          FontSize="14">
 
-                <DataGrid Name="dgDoctors" AutoGenerateColumns="False" CanUserAddRows="False" 
-                      HeadersVisibility="Column" GridLinesVisibility="All">
+                    <!-- DataGrid Styles -->
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#E8E8E8"/>
+                            <Setter Property="Foreground" Value="#333333"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Padding" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+                            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="Padding" Value="10"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Style>
+                    </DataGrid.CellStyle>
+
+                    <!-- DataGrid Columns -->
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="100" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="100" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="100" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="60" IsReadOnly="True"/>
-                        <DataGridTemplateColumn Header="Actions" Width="100">
+                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="80" IsReadOnly="True"/>
+
+                        <!-- THIS IS THE UPDATED ACTIONS COLUMN -->
+                        <DataGridTemplateColumn Header="Actions" Width="220">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Delete"
-                                        Tag="{Binding Id}" Padding="5,2"/>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Button Content="View History" 
+                                                Background="#2196F3" Foreground="White"
+                                                BorderThickness="0" Padding="8,4"
+                                                Click="ViewHistory_Click"/>
+
+                                        <Button Content="Book Appt." 
+                                                Background="#4CAF50" Foreground="White"
+                                                BorderThickness="0" Padding="8,4" Margin="5,0,0,0"
+                                                Click="BookAppointment_Click"/>
+                                    </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -83,7 +160,10 @@
             </StackPanel>
         </Border>
 
-        <!-- Go Back Button -->
-        <Button Content="Go Back" HorizontalAlignment="Left" Margin="343,209,0,0" VerticalAlignment="Top" Width="94" Click="Button_Click"/>
+        <!-- Footer -->
+        <Border Grid.Row="3" Background="White" BorderBrush="#DDDDDD" BorderThickness="0,1,0,0">
+            <Button Name="GoBackButton" Content="Go Back" Click="GoBackButton_Click"
+                    Style="{StaticResource BackButton}" HorizontalAlignment="Center" Margin="10"/>
+        </Border>
     </Grid>
 </Page>

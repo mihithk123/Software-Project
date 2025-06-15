@@ -1,4 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
+﻿
+
+using Microsoft.Data.SqlClient;
 using Software_Project.Models;
 using System;
 using System.Collections.ObjectModel;
@@ -15,21 +17,23 @@ namespace Software_Project.Controllers
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
-                using (SqlDataReader reader = cmd.ExecuteReader())
+         
+                string query = "SELECT ID, FristName, LastName, Phone, Age FROM Patient";
+                SqlCommand command = new SqlCommand(query, con);
+
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        patients.Add(new PatientM
+                        var patient = new PatientM
                         {
                             Id = reader.GetInt32(0),
                             FirstName = reader.GetString(1),
                             LastName = reader.GetString(2),
-                            Phone = reader.GetString(3),
-
-                            // *** THIS IS THE FIX FOR YOUR ERROR ***
-                            // Read the 'Age' column as an integer, not a string.
-                            Age = reader.GetInt32(4)
-                        });
+                            Phone = reader.IsDBNull(3) ? "" : reader.GetString(3),
+                            Age = reader.IsDBNull(4) ? "" : reader.GetString(4)
+                        };
+                        patients.Add(patient);
                     }
                 }
             }
@@ -40,15 +44,16 @@ namespace Software_Project.Controllers
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                // FIX: Using the correct 'FirstName' column name.
-                string query = "INSERT INTO Patient (FirstName, LastName, Phone, Age) VALUES (@FirstName, @LastName, @Phone, @Age)";
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@FirstName", patient.FirstName);
-                cmd.Parameters.AddWithValue("@LastName", patient.LastName);
-                cmd.Parameters.AddWithValue("@Phone", patient.Phone);
-                cmd.Parameters.AddWithValue("@Age", patient.Age); // This now correctly sends an int.
                 con.Open();
-                return cmd.ExecuteNonQuery() > 0;
+                
+                string query = "INSERT INTO Patient (FristName, LastName, Phone, Age) VALUES (@FirstName, @LastName, @Phone, @Age)";
+                SqlCommand command = new SqlCommand(query, con);
+                command.Parameters.AddWithValue("@FirstName", patient.FirstName);
+                command.Parameters.AddWithValue("@LastName", patient.LastName);
+                command.Parameters.AddWithValue("@Phone", patient.Phone);
+                command.Parameters.AddWithValue("@Age", patient.Age);
+                int result = command.ExecuteNonQuery();
+                return result > 0;
             }
         }
 
@@ -56,29 +61,35 @@ namespace Software_Project.Controllers
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                // FIX: Using the correct 'FirstName' column name.
-                string query = "UPDATE Patient SET Phone = @Phone, Age = @Age WHERE FirstName = @FirstName AND LastName = @LastName";
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@FirstName", patient.FirstName);
-                cmd.Parameters.AddWithValue("@LastName", patient.LastName);
-                cmd.Parameters.AddWithValue("@Phone", patient.Phone);
-                cmd.Parameters.AddWithValue("@Age", patient.Age); // This now correctly sends an int.
                 con.Open();
-                return cmd.ExecuteNonQuery() > 0;
+                
+                string query = @"UPDATE Patient 
+                                 SET FristName = @FirstName, LastName = @LastName, Phone = @Phone, Age = @Age 
+                                 WHERE ID = @ID";
+                SqlCommand command = new SqlCommand(query, con);
+                
+                
+                command.Parameters.AddWithValue("@ID", patient.Id);
+                command.Parameters.AddWithValue("@FirstName", patient.FirstName);
+                command.Parameters.AddWithValue("@LastName", patient.LastName);
+                command.Parameters.AddWithValue("@Phone", patient.Phone);
+                command.Parameters.AddWithValue("@Age", patient.Age);
+                int result = command.ExecuteNonQuery();
+                return result > 0;
             }
         }
 
-        public bool DeletePatient(string firstName, string lastName)
+     
+        public bool DeletePatient(int patientId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                // FIX: Using the correct 'FirstName' column name.
-                string query = "DELETE FROM Patient WHERE FirstName = @FirstName AND LastName = @LastName";
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@FirstName", firstName);
-                cmd.Parameters.AddWithValue("@LastName", lastName);
                 con.Open();
-                return cmd.ExecuteNonQuery() > 0;
+                string query = "DELETE FROM Patient WHERE ID = @ID";
+                SqlCommand command = new SqlCommand(query, con);
+                command.Parameters.AddWithValue("@ID", patientId);
+                int result = command.ExecuteNonQuery();
+                return result > 0;
             }
         }
     }

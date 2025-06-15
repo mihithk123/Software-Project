@@ -4,9 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
 namespace Software_Project.Models
 {
-    class OthM
+    
+    public class OthM
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Phone { get; set; }
+        public int Age { get; set; }
+        public string UserName { get; set; }
     }
 }
