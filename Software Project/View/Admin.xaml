@@ -7,18 +7,14 @@
       mc:Ignorable="d"
       Title="Admin" d:DesignWidth="1080"
       Background="#FFE8F4F8" Height="620">
-    <!-- RESPONSIVE CHANGE: Removed fixed Height and Width from Page. 
-         The page will now fill its parent container (e.g., Window or Frame). 
-         The d:DesignHeight/Width attributes are for the designer only. -->
-
-    <!-- RESPONSIVE CHANGE: Removed problematic negative margin from the main Grid.
-         The Grid now properly fills the Page. -->
+    
     <Grid Background="#FF2E86C1">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Header height is determined by its content -->
+            
             <RowDefinition Height="*"/>
-            <!-- Main content area takes all remaining space -->
+            
+            
         </Grid.RowDefinitions>
 
         <!-- Header -->
@@ -38,9 +34,9 @@
         <!-- Main Content -->
         <Grid Grid.Row="1" Margin="10">
             <Grid.ColumnDefinitions>
-                <!-- A fixed-width column for the menu is a good responsive pattern. -->
+                
                 <ColumnDefinition Width="250"/>
-                <!-- The content column takes all remaining horizontal space. -->
+                
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -56,8 +52,7 @@
                         <Border Background="#FF85C1E9" Margin="10,5" CornerRadius="5">
                             <StackPanel Margin="10">
                                 <TextBlock Text="Patient Management" FontSize="14" FontWeight="Bold" Foreground="#FF1B4F72" Margin="0,5"/>
-                                <!-- RESPONSIVE CHANGE: Removed fixed Width. HorizontalAlignment=Stretch makes it fill its container. -->
-                                <!-- SEMANTIC FIX: Replaced RadioButton inside a Button with just a Content string. -->
+                                
                                 <Button x:Name="ViewPatientsBtn" Content="Manage Patients" HorizontalAlignment="Stretch" 
                                         Height="35" Background="#FF3498DB" Foreground="White"
                                         BorderThickness="0" Margin="0,5" Click="ViewPatientsBtn_Click"/>
@@ -100,25 +95,25 @@
                 </ScrollViewer>
             </Border>
 
-            <!-- Right Content Panel -->
+            
             <Grid Grid.Column="1" Margin="10,0,0,0">
-                <!-- RESPONSIVE CHANGE: Cleaned up RowDefinitions. Using Auto and * sizing instead of fixed values or hacks. -->
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <!-- Welcome Message -->
+                    
                     <RowDefinition Height="Auto"/>
-                    <!-- Statistics Cards -->
+                    
                     <RowDefinition Height="*"/>
-                    <!-- Main Content Area (takes remaining space) -->
+                    
                 </Grid.RowDefinitions>
 
-                <!-- Welcome Message -->
+                
                 <Border Grid.Row="0" Background="#FF5DADE2" CornerRadius="5" Margin="0,0,0,10">
                     <TextBlock Text="Welcome to the Admin Dashboard" FontSize="20" FontWeight="Bold" Foreground="White"
                                HorizontalAlignment="Center" VerticalAlignment="Center" Padding="10"/>
                 </Border>
 
-                <!-- Statistics Cards -->
+                
                 <Grid Grid.Row="1" Margin="0,0,0,10">
                     <Grid.Resources>
                         <Style x:Key="StatCardStyle" TargetType="Border">
@@ -127,7 +122,7 @@
                             <Setter Property="Padding" Value="10"/>
                         </Style>
                     </Grid.Resources>
-                    <!-- RESPONSIVE CHANGE: Using star-sizing for columns. They will share space equally and resize. -->
+                    
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -136,33 +131,33 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
 
-                <!-- Main Content Area -->
+                
                 <Border Grid.Row="2" Background="White" CornerRadius="5">
-                    <!-- RESPONSIVE CHANGE: This Grid is structured to hold a title, scrolling content, and actions at the bottom. -->
+                    
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <!-- Title Row -->
+                            
                             <RowDefinition Height="*"/>
-                            <!-- Content Row (takes all space) -->
+                            
                             <RowDefinition Height="Auto"/>
-                            <!-- Actions Row -->
+                            
                         </Grid.RowDefinitions>
 
-                        <!-- Content Title -->
+                        
                         <Border Grid.Row="0" Background="#FF85C1E9" CornerRadius="5,5,0,0" Padding="10">
                             <TextBlock x:Name="ContentTitleLabel" Text="Recent Activities" FontSize="16" FontWeight="Bold"
                                        Foreground="#FF1B4F72" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
 
-                        <!-- Content Display Area -->
+                        
                         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="15">
                             <StackPanel x:Name="ContentDisplayPanel">
-                                <!-- Sample/Dynamic Content Goes Here -->
+                                
                             </StackPanel>
                         </ScrollViewer>
 
-                        <!-- Quick Actions Area (always at the bottom) -->
+                        
                         <Border Grid.Row="1" BorderBrush="#FFDDDDDD" BorderThickness="0,1,0,0" Padding="10" Margin="10,28,-10,320" RenderTransformOrigin="0.499,-0.911">
                             <StackPanel>
                                 <TextBlock Text="Quick Actions:" FontSize="14" FontWeight="Bold"

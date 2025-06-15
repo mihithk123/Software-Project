@@ -10,7 +10,6 @@
 
 
     <Page.Resources>
-        <!-- Modern Button Style -->
         <Style x:Key="ModernButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#FF007ACC"/>
             <Setter Property="Foreground" Value="White"/>
@@ -42,7 +41,6 @@
             </Setter>
         </Style>
 
-        <!-- Modern TextBox Style -->
         <Style x:Key="ModernTextBoxStyle" TargetType="TextBox">
             <Setter Property="Background" Value="#FF333333"/>
             <Setter Property="Foreground" Value="White"/>
@@ -72,7 +70,6 @@
             </Setter>
         </Style>
 
-        <!-- Modern PasswordBox Style -->
         <Style x:Key="ModernPasswordBoxStyle" TargetType="PasswordBox">
             <Setter Property="Background" Value="#FF333333"/>
             <Setter Property="Foreground" Value="White"/>
@@ -102,7 +99,6 @@
             </Setter>
         </Style>
 
-        <!-- Link Button Style -->
         <Style x:Key="LinkButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#FF007ACC"/>
@@ -126,7 +122,6 @@
     </Page.Resources>
 
     <Grid>
-        <!-- Background with gradient -->
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="#FF2A2A2A" Offset="0"/>
@@ -134,7 +129,6 @@
             </LinearGradientBrush>
         </Grid.Background>
 
-        <!-- Three dots menu button -->
         <Button x:Name="MenuButton" 
                 Content="⋮" 
                 HorizontalAlignment="Right" 
@@ -148,12 +142,10 @@
                 FontSize="18"
                 Cursor="Hand"/>
 
-        <!-- Main content container -->
         <StackPanel HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
                     Width="300">
 
-            <!-- Logo circle with code icon -->
             <Border Width="80" 
                     Height="80" 
                     CornerRadius="40" 
@@ -168,7 +160,6 @@
                           VerticalAlignment="Center"/>
             </Border>
 
-            <!-- Welcome text -->
             <TextBlock x:Name="WelcomeLabel" 
                        Text="Welcome Back!" 
                        HorizontalAlignment="Center" 
@@ -186,7 +177,6 @@
                        Foreground="#FFCCCCCC"
                        Margin="0,0,0,40"/>
 
-            <!-- Username field -->
             <StackPanel Margin="0,0,0,20">
                 <TextBlock Text="Enter Username" 
                           FontFamily="Segoe UI" 
@@ -208,7 +198,6 @@
                 </Grid>
             </StackPanel>
 
-            <!-- Password field -->
             <StackPanel Margin="0,0,0,30">
                 <TextBlock Text="Enter Password" 
                           FontFamily="Segoe UI" 
@@ -221,14 +210,12 @@
                             Height="45"/>
             </StackPanel>
 
-            <!-- Login button -->
             <Button x:Name="LoginButton" 
                     Content="LOG IN" 
                     Style="{StaticResource ModernButtonStyle}"
                     Height="50" 
                     Margin="0,0,0,30" Click="LoginButton_Click"/>
 
-            <!-- Create account link -->
             <Button x:Name="CreateAccountButton" 
                     Content="Create Account" 
                     Style="{StaticResource LinkButtonStyle}"
